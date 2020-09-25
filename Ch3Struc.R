@@ -42,7 +42,7 @@ library(LEA)
 obj.snmf = snmf("structure.geno", K = 3, alpha = 100, project = "new")
 qmatrix = Q(obj.snmf, K = 3)
 
-barplot(t(qmatrix), col = c("orange","violet","lightgreen"), border = NA, space = 0,
+barplot(t(qmatrix), col = c("#440154FF", "#21908CFF", "#FDE725FF"), border = NA, space = 0,
 xlab = "Individuals", ylab = "Admixture coefficients")
 
 coord = read.table("coordinates.coord")
@@ -61,12 +61,12 @@ plot(coord, xlab = "Longitude", ylab = "Latitude", type = "n")
 map(add = T, col = "grey90", fill = TRUE)
 for (i in 1:Npop){
 add.pie(z = qpop[i,], x = coord.pop[i,1], y = coord.pop[i,2], labels = "",
-col = c("orange","violet","lightgreen"))}
+col = c("#440154FF", "#21908CFF", "#FDE725FF"))}
 #maybe change the color scheme to viridis or magma
 
 pop = scan("mypop.txt")
 
-obj.snmf = snmf("secondary_contact.geno", K = 1:8, ploidy = 2, entropy = T,
+obj.snmf = snmf("structure.geno", K = 1:8, ploidy = 2, entropy = T,
 alpha = 100, project = "new")
 plot(obj.snmf, col = "blue4", cex = 1.4, pch = 19)
 
