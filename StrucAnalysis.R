@@ -15,6 +15,11 @@ install.packages("LEA_1.4.0_tar.gz", repos = NULL, type ="source")
 source("http://membres-timc.imag.fr/Olivier.Francois/Conversion.R")
 source("http://membres-timc.imag.fr/Olivier.Francois/POPSutilities.R")
 
+# So, to my understanding, this is a function that takes a stucture file, 
+# and wrangles or reformats it somehow so it's usable in this package?
+# Or maybe, input.file is just an excel file that is converted to the ./genotype.geno format
+# I need to review the documentation for this package
+
 struct2geno(file = input.file, TESS = FALSE, diploid = TRUE, FORMAT = 2,
 extra.row = 0, extra.col = 0, output = "./genotype.geno")
 
@@ -46,6 +51,7 @@ map(add = T, col = "grey90", fill = TRUE)
 for (i in 1:Npop){
 add.pie(z = qpop[i,], x = coord.pop[i,1], y = coord.pop[i,2], labels = "",
 col = c("orange","violet","lightgreen"))}
+#maybe change the color scheme to viridis or magma
 
 pop = scan("mypop.txt")
 
