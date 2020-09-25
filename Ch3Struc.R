@@ -1,7 +1,6 @@
 # Dissertation Chapter 3 codes
 # Structure in R
 
-
 # http://membres-timc.imag.fr/Olivier.Francois/tutoRstructure.pdf
 #############################################################################
 # Installing packages
@@ -12,23 +11,35 @@ biocLite("LEA")
 
 install.packages("LEA_1.4.0_tar.gz", repos = NULL, type ="source")
 
-source("http://membres-timc.imag.fr/Olivier.Francois/Conversion.R")
-source("http://membres-timc.imag.fr/Olivier.Francois/POPSutilities.R")
+# call up the following installed packages-----------------
+library(car)
+library(Hmisc)
+library(MASS)
+library(splines)
+library(ggplot2)
+library(plyr)
+library(rcompanion)
+library(ggpubr)
+library(viridis)
+library(mgcv)
+
+# Import data set for structure analysis
+
+library(readr)
+rawdata <-read_csv("G:/RCodes/Ch3/structure.csv")
+View(structure)
 
 # So, to my understanding, this is a function that takes a stucture file, 
 # and wrangles or reformats it somehow so it's usable in this package?
-# Or maybe, input.file is just an excel file that is converted to the ./genotype.geno format
+# Or maybe,  is just an excel file that is converted to the ./genotype.geno format
 # I need to review the documentation for this package
 
-struct2geno(file = input.file, TESS = FALSE, diploid = TRUE, FORMAT = 2,
-extra.row = 0, extra.col = 0, output = "./genotype.geno")
+struct2geno(file = structure.csv, TESS = FALSE, diploid = TRUE, FORMAT = 1,
+extra.row = 0, extra.col = 2, output = "./genotype.geno")
 
-input.file = "http://membres-timc.imag.fr/Olivier.Francois/secondary_contact.str"
-struct2geno(file = input.file, TESS = TRUE, diploid = TRUE, FORMAT = 2,
-extra.row = 0, extra.col = 0, output = "secondary_contact.geno")
-
+# calling up LEA, three clusters
 library(LEA)
-obj.snmf = snmf("secondary_contact.geno", K = 3, alpha = 100, project = "new")
+obj.snmf = snmf("structure.geno", K = 3, alpha = 100, project = "new")
 qmatrix = Q(obj.snmf, K = 3)
 
 barplot(t(qmatrix), col = c("orange","violet","lightgreen"), border = NA, space = 0,
